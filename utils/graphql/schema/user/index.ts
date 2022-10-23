@@ -2,12 +2,22 @@ import { gql } from 'apollo-server-micro';
 
 const userShema = gql`
      type User {
-        id: String
+        id: ID!
         name: String
         lastName: String
     }
+
     type Query {
-        users: [User]!
+        users: [User]
+        user(id: ID!): User
+    }
+
+    type Mutation{
+        createUser(name: String, lastName: String) : User!
+        updateUserAll(name: String, lastName: String) :[User]
+        updateUserById(id: ID!, name: String, lastName: String) : User!
+        deleteUserAll: [User]
+        deleteUserById(id: ID!) : User
     }
 `;
 

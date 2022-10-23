@@ -2,13 +2,22 @@ import { gql } from 'apollo-server-micro';
 
 const eventoShema = gql`
      type Evento {
-        id: String
+        id: ID!
         title: String
         description: String
     }
 
     type Query {
-        eventos: [Evento]! 
+        eventos: [Evento]
+        evento(id: ID!): Evento
+    }
+
+    type Mutation {
+        createEvento(title: String, description: String) : Evento!
+        updateEventoAll(title: String, description: String) : [Evento]
+        updateEventoById(id: ID!, title: String, description: String) : Evento!
+        deleteEventoAll: [Evento]
+        deleteEventoById(id: ID!) : Evento
     }
 `
 
